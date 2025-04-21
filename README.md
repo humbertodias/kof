@@ -1,4 +1,5 @@
-用sdl实现的支持多个平台的拳皇，人物配置格式来自于mugen。
-大概是2015年左右的代码，时间比较久远，不确定还能不能运行起来。
-
+The King of Fighters that supports multiple platforms is implemented using sdl. 
+The character configuration format comes from mugen.
+This is probably code from around 2015, which is quite old. 
+I'm not sure if it can still run.
 
