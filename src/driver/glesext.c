@@ -65,7 +65,9 @@ void SwapWindow()
 	 char* argv[1] = {"kof"};
 	 int i;
 
-	 state = SDLTest_CommonCreateState(argv, SDL_INIT_VIDEO);
+	// TODO: FIXME
+	 // state = SDLTest_CommonCreateState(argv, SDL_INIT_VIDEO);
+	 state = 0;//SDLTest_CommonCreateState(argv, SDL_INIT_VIDEO);
 	 if (!state) {
 		 return 1;
 	 }
@@ -90,9 +92,10 @@ void SwapWindow()
 	 state->window_y = 0;
 #endif // WIN32
 
-	 if (!SDLTest_CommonInit(state)) {
-		 return 0;
-	 }
+	// TODO: FIXME
+	 // if (!SDLTest_CommonInit(state)) {
+		//  return 0;
+	 // }
 
 	 context = (SDL_GLContext *)SDL_calloc(state->num_windows, sizeof(context));
 	 if (context == NULL) {
