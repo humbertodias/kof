@@ -66,8 +66,7 @@ void SwapWindow()
 	 int i;
 
 	// TODO: FIXME
-	 // state = SDLTest_CommonCreateState(argv, SDL_INIT_VIDEO);
-	 state = 0;//SDLTest_CommonCreateState(argv, SDL_INIT_VIDEO);
+	 state = SDLTest_CommonCreateState(argv, SDL_INIT_VIDEO);
 	 if (!state) {
 		 return 1;
 	 }
@@ -93,9 +92,9 @@ void SwapWindow()
 #endif // WIN32
 
 	// TODO: FIXME
-	 // if (!SDLTest_CommonInit(state)) {
-		//  return 0;
-	 // }
+	 if (!SDLTest_CommonInit(state)) {
+		 return 0;
+	 }
 
 	 context = (SDL_GLContext *)SDL_calloc(state->num_windows, sizeof(context));
 	 if (context == NULL) {
