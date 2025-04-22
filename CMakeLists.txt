@@ -3,7 +3,6 @@ set(PROJECT kof)
 project(${PROJECT})
 
 # Add global definitions
-add_definitions("-Wall")
 file(GLOB_RECURSE SOURCE_FILES
 "src/*.cpp"
 "src/*.c")
@@ -35,6 +34,7 @@ message(STATUS "SDL2_INCLUDE_DIRS: ${SDL2_INCLUDE_DIRS}")
 message(STATUS "SDL2_LIBRARY_DIRS: ${SDL2_LIBRARY_DIRS}")
 message(STATUS "GLEW_INCLUDE_DIRS: ${GLEW_INCLUDE_DIRS}")
 
+target_compile_options(${PROJECT} PRIVATE -Wall -Wextra -Wpedantic)
 include_directories(
     src
     ${SDL2_INCLUDE_DIRS}
@@ -57,6 +57,9 @@ link_directories(
 )
 message(STATUS "GLEW_LIBRARY_DIRS: ${GLEW_LIBRARY_DIRS}")
 target_link_libraries(${PROJECT}
+    -L${SDL2_LIBRARY_DIRS}
+    -L${SDL2_IMAGE_LIBRARY_DIRS}
+    -L${SDL2_GFX_LIBRARY_DIRS}
     -lSDL2
     -lSDL2_image
     -lSDL2_gfx
