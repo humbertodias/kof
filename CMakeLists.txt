@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.27)
 set(PROJECT kof)
 project(${PROJECT})
 
+# Toolchain do vcpkg
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+  set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      CACHE STRING "")
+endif()
+
 # Add global definitions
 file(GLOB_RECURSE SOURCE_FILES
 "src/*.cpp"

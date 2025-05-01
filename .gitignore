@@ -57,3 +57,4 @@ assets
 .vscode
 build
 cmake-build-*
+vcpkg_installed/
