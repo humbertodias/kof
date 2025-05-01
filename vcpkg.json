@@ -7,7 +7,11 @@
       "sdl2-mixer",
       "sdl2-ttf",
       "sdl2-gfx",
-      "glew"
+      "glew",
+      "libpng",
+      "wavpack",
+      "libvorbis",
+      "freetype"
     ]
   }
   

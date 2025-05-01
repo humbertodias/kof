@@ -35,6 +35,10 @@ pkg_check_modules(SDL2_TTF REQUIRED SDL2_ttf)
 pkg_check_modules(SDL2_MIXER REQUIRED SDL2_mixer)
 pkg_check_modules(GLEW REQUIRED glew)
 pkg_check_modules(GLESV2 REQUIRED glesv2)
+pkg_check_modules(PNG REQUIRED libpng)
+pkg_check_modules(WAVPACK REQUIRED wavpack)
+pkg_check_modules(VORBIS REQUIRED vorbisfile vorbis ogg)
+pkg_check_modules(FREETYPE REQUIRED freetype2)
 
 message(STATUS "SDL2_INCLUDE_DIRS: ${SDL2_INCLUDE_DIRS}")
 message(STATUS "SDL2_LIBRARY_DIRS: ${SDL2_LIBRARY_DIRS}")
@@ -50,6 +54,10 @@ include_directories(
     ${SDL2_MIXER_LIBRARY_DIRS}
     ${GLEW_INCLUDE_DIRS}
     ${GLESV2_INCLUDE_DIRS}
+    ${PNG_INCLUDE_DIRS}
+    ${WAVPACK_INCLUDE_DIRS}
+    ${VORBIS_INCLUDE_DIRS}
+    ${FREETYPE_INCLUDE_DIRS}
 )
 
 link_directories(
@@ -60,6 +68,10 @@ link_directories(
     ${SDL2_MIXER_LIBRARY_DIRS}
     ${GLEW_LIBRARY_DIRS}
     ${GLESV2_LIBRARY_DIRS}
+    ${PNG_LIBRARY_DIRS}
+    ${WAVPACK_LIBRARY_DIRS}
+    ${VORBIS_LIBRARY_DIRS}
+    ${FREETYPE_CFLAGS_OTHER}
 )
 message(STATUS "GLEW_LIBRARY_DIRS: ${GLEW_LIBRARY_DIRS}")
 target_link_libraries(${PROJECT}
@@ -74,4 +86,8 @@ target_link_libraries(${PROJECT}
     -lGLEW
     -lGLESv2
     -lGL
+    -lpng
+    -lwavpack
+    ${VORBIS_LIBRARIES}
+    ${FREETYPE_LIBRARIES}
 )

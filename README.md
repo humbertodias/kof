@@ -13,19 +13,12 @@ Character configuration follows the **M.U.G.E.N** format.
 - Built using SDL2 and OpenGL
 - Includes sound, graphics, font rendering, and input handling
 
+### Clone
+```shell
+git clone --recurse-submodules https://github.com/humbertodias/kof
+```
 
 ## 🔧 Dependencies
-
-### Ubuntu
-```shell
-sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-gfx-dev \
-libsdl2-ttf-dev libsdl2-mixer-dev libglew-dev libgles2-mesa-dev
-```
-
-### macOS (via Homebrew)
-```shell
-brew install sdl2 sdl2_image sdl2_gfx sdl2_ttf sdl2_mixer glew
-```
 
 ### vcpkg
 ```shell
@@ -33,12 +26,10 @@ brew install sdl2 sdl2_image sdl2_gfx sdl2_ttf sdl2_mixer glew
 ./vcpkg/vcpkg install
 ```
 
-git clone --recurse-submodules https://github.com/humbertodias/kof
-
 ## 🛠️ Build Instructions
 
 ```shell
-cmake -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+cmake -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
 cmake --build build
 ```
 
