@@ -29,15 +29,14 @@ git clone --recurse-submodules https://github.com/humbertodias/kof
 ## 🛠️ Build Instructions
 
 ```shell
-cmake -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+cmake -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-linux
 cmake --build build
 ```
 
 ## ▶️ Run the Game
 
 ```shell
-cd Resource
-../build/kof
+(cd Resource && ../build/kof)
 ```
 
 ## 📸 Preview
