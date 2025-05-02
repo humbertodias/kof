@@ -11,7 +11,9 @@
       "libpng",
       "wavpack",
       "libvorbis",
-      "freetype"
+      "freetype",
+      "opengl",
+      "angle"
     ]
   }
   

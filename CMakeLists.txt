@@ -34,10 +34,7 @@ find_package(PNG REQUIRED)
 find_package(WavPack REQUIRED)
 find_package(Vorbis REQUIRED)
 find_package(Freetype REQUIRED)
-
-message(STATUS "SDL2_INCLUDE_DIRS: ${SDL2_INCLUDE_DIRS}")
-message(STATUS "SDL2_LIBRARY_DIRS: ${SDL2_LIBRARY_DIRS}")
-message(STATUS "GLEW_INCLUDE_DIRS: ${GLEW_INCLUDE_DIRS}")
+find_package(OpenGL REQUIRED)
 
 target_compile_options(${PROJECT} PRIVATE -Wall -Wextra -Wpedantic)
 include_directories(
@@ -71,12 +68,15 @@ link_directories(
     ${FREETYPE_CFLAGS_OTHER}
     ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib
 )
-message(STATUS "GLEW_LIBRARY_DIRS: ${GLEW_LIBRARY_DIRS}")
 
 target_link_libraries(${PROJECT_NAME}
-SDL2::SDL2
-SDL2_ttf::SDL2_ttf-static
-SDL2_image::SDL2_image-static
-SDL2_mixer::SDL2_mixer-static
-GLEW::GLEW
+    SDL2::SDL2
+    SDL2_ttf::SDL2_ttf-static
+    SDL2_image::SDL2_image-static
+    SDL2_mixer::SDL2_mixer-static
+    GLEW::glew_s
 )
+
+if(APPLE)
+    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
+endif()

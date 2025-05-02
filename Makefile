@@ -22,8 +22,7 @@ docker/build:
 docker/run:
 	docker run -it -v `pwd`:/wd -w /wd kof
 
-ci:
-	docker build -t kof .
+ci:	docker/build
 	docker run --rm -v "$(PWD)":/app -w /app kof sh -c "make clean build"
 
 clean:
@@ -31,10 +30,3 @@ clean:
 
 tar/gz:	build
 	tar cvfz kof-$(TAG_NAME)-$(OS)-$(ARCH).tar.gz build/kof
-
-CMAKE_VERSION=3.31.7
-cmake/install:
-	curl -L -o cmake.sh https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-$(ARCH).sh
-	chmod +x cmake.sh
-	./cmake.sh --prefix=/usr/local --skip-license
-	rm cmake.sh

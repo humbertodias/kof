@@ -27,7 +27,7 @@ jobs:
             submodules: true
             
       - name: Install dependencies
-        run: sudo apt update -y && sudo apt install -y cmake build-essential curl git pkg-config zip libxmu-dev libxi-dev libgl-dev autoconf automake autoconf-archive libltdl-dev python3 python3-jinja2 ninja-build
+        run: sudo apt update -y && sudo apt install -y cmake build-essential curl git pkg-config zip libxmu-dev libxi-dev libgl-dev autoconf automake autoconf-archive libltdl-dev python3 python3-jinja2 ninja-build libglu1-mesa-dev
 
       - name: Build tar.gz
         run: |
