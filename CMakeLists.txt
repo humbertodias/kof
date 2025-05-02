@@ -75,6 +75,7 @@ target_link_libraries(${PROJECT_NAME}
     SDL2_image::SDL2_image-static
     SDL2_mixer::SDL2_mixer-static
     GLEW::glew_s
+    GLU
 )
 
 if(APPLE)

@@ -124,6 +124,9 @@ void CSndConfig::DecodeSndFile(SDL_RWops* lpSndFile)
 			CError("Could not open snd %d %d: %s\n", curSnd->nGroupNumber, curSnd->nSoundNumber, SDL_GetError());
 		}
 
+		SDL_Log("Audio format: 0x%04x\n", audio_format);
+		SDL_Log("Audio channel: 0x%04x\n", audio_channels);
+
 		if ( wav_spec.format != audio_format ||
 			wav_spec.channels != audio_channels ||
 			wav_spec.freq != audio_rate ) 
@@ -131,7 +134,9 @@ void CSndConfig::DecodeSndFile(SDL_RWops* lpSndFile)
 			if ( SDL_BuildAudioCVT(&wav_cvt,
 				wav_spec.format, wav_spec.channels, wav_spec.freq,
 				audio_format, audio_channels, audio_rate) < 0 ) {
-					throw CError("SDL_BuildAudioCVT failed!");
+					const char* sdlError = SDL_GetError();
+					SDL_Log("SDL_BuildAudioCVT failed: %s", sdlError);
+					throw CError("SDL_BuildAudioCVT failed");
 			}
 
 			samplesize = ((wav_spec.format & 0xFF)/8)*wav_spec.channels;

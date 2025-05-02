@@ -24,7 +24,7 @@ info :
 
 CGame* CGame::GetInstance()
 {
-	if ( pGameInstance == NULL )  //ÅÐ¶ÏÊÇ·ñµÚÒ»´Îµ÷ÓÃ
+	if ( pGameInstance == NULL )  //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Ò»ï¿½Îµï¿½ï¿½ï¿½
 		pGameInstance = new CGame();
 	return pGameInstance;
 }
@@ -55,12 +55,14 @@ void CGame::InitGame()
 	CGameTimer::GetInstance()->InitTimer();
 	CConfigManager::GetInstance()->InitManager();
 
-	if(!CSDLManager::GetInstance()->Init())
+	if (!CSDLManager::GetInstance()->Init())
 	{
-		PrintMessage("CGame:SDL init failed");
-		throw CError("init failed");
-		bError=true;
+		const char* sdlError = SDL_GetError();
+		PrintMessage("CGame: SDL init failed - %s", sdlError);
+		bError = true;
+		throw CError(sdlError);
 	}
+
 	//init the main engine
 	SDL_initFramerate(&m_FPSmanager);
 	SDL_setFramerate(&m_FPSmanager,60);

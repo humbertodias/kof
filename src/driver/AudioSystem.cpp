@@ -28,6 +28,16 @@ CAudioSystem::~CAudioSystem()
 
 bool CAudioSystem::InitSystem()
 {
+
+	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
+        PrintMessage("SDL_Init Error: %s\n", SDL_GetError());
+        return 1;
+    }
+
+    const char* driver = SDL_GetCurrentAudioDriver();
+    PrintMessage("SDL audio driver in use: %s\n", driver ? driver : "none");
+
+
 	/*m_propaudio_rate = 22050;
 	m_propaudio_format = AUDIO_S16LSB;
 	m_propaudio_channels = 2;
