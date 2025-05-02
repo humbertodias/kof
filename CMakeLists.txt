@@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 3.27)
 set(PROJECT kof)
 project(${PROJECT})
 
-# Add global definitions
-file(GLOB_RECURSE SOURCE_FILES
-"src/*.cpp"
-"src/*.c")
+# Toolchain do vcpkg
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+  set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      CACHE STRING "")
+endif()
 
-file(GLOB_RECURSE HEADER_FILES "src/*.h"
-"src/*.l"
-)
+# Add global definitions
+file(GLOB_RECURSE SOURCE_FILES "src/*.cpp" "src/*.c")
+file(GLOB_RECURSE HEADER_FILES "src/*.h" "src/*.l" )
+
 add_executable(${PROJECT} ${SOURCE_FILES} ${HEADER_FILES})
 
 message("CMAKE_CXX_COMPILER_ID: ${CMAKE_CXX_COMPILER_ID}")
@@ -22,13 +24,16 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
 endif()
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(SDL2 REQUIRED sdl2)
-pkg_check_modules(SDL2_IMAGE REQUIRED SDL2_image)
-pkg_check_modules(SDL2_GFX REQUIRED SDL2_gfx)
-pkg_check_modules(SDL2_TTF REQUIRED SDL2_ttf)
-pkg_check_modules(SDL2_MIXER REQUIRED SDL2_mixer)
-pkg_check_modules(GLEW REQUIRED glew)
-pkg_check_modules(GLESV2 REQUIRED glesv2)
+find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2_image CONFIG REQUIRED)
+find_package(SDL2_mixer CONFIG REQUIRED)
+find_package(SDL2_ttf CONFIG REQUIRED)
+find_package(sdl2-gfx CONFIG REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(PNG REQUIRED)
+find_package(WavPack REQUIRED)
+find_package(Vorbis REQUIRED)
+find_package(Freetype REQUIRED)
 
 message(STATUS "SDL2_INCLUDE_DIRS: ${SDL2_INCLUDE_DIRS}")
 message(STATUS "SDL2_LIBRARY_DIRS: ${SDL2_LIBRARY_DIRS}")
@@ -44,6 +49,12 @@ include_directories(
     ${SDL2_MIXER_LIBRARY_DIRS}
     ${GLEW_INCLUDE_DIRS}
     ${GLESV2_INCLUDE_DIRS}
+    ${PNG_INCLUDE_DIRS}
+    ${WAVPACK_INCLUDE_DIRS}
+    ${VORBIS_INCLUDE_DIRS}
+    ${FREETYPE_INCLUDE_DIRS}
+    ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include
+    
 )
 
 link_directories(
@@ -54,18 +65,18 @@ link_directories(
     ${SDL2_MIXER_LIBRARY_DIRS}
     ${GLEW_LIBRARY_DIRS}
     ${GLESV2_LIBRARY_DIRS}
+    ${PNG_LIBRARY_DIRS}
+    ${WAVPACK_LIBRARY_DIRS}
+    ${VORBIS_LIBRARY_DIRS}
+    ${FREETYPE_CFLAGS_OTHER}
+    ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib
 )
 message(STATUS "GLEW_LIBRARY_DIRS: ${GLEW_LIBRARY_DIRS}")
-target_link_libraries(${PROJECT}
-    -L${SDL2_LIBRARY_DIRS}
-    -L${SDL2_IMAGE_LIBRARY_DIRS}
-    -L${SDL2_GFX_LIBRARY_DIRS}
-    -lSDL2
-    -lSDL2_image
-    -lSDL2_gfx
-    -lSDL2_mixer
-    -lSDL2_ttf
-    -lGLEW
-    -lGLESv2
-    -lGL
+
+target_link_libraries(${PROJECT_NAME}
+SDL2::SDL2
+SDL2_ttf::SDL2_ttf-static
+SDL2_image::SDL2_image-static
+SDL2_mixer::SDL2_mixer-static
+GLEW::GLEW
 )
