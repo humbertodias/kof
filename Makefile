@@ -1,8 +1,16 @@
+# System info
+OS    := $(shell uname -s)
+ARCH  := $(shell uname -m)
+CMAKE := $(shell command -v cmake)
+
+# Git versioning
+TAG_NAME := $(shell git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD)
+
 .PHONY: build
 
 build:
-	cmake -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja
-	cmake --build build
+	$(CMAKE) -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja
+	$(CMAKE) --build build
 
 vcpkg/install:
 	./vcpkg/bootstrap-vcpkg.sh
@@ -19,12 +27,11 @@ ci:
 	docker run --rm -v "$(PWD)":/app -w /app kof sh -c "make clean build"
 
 clean:
-	rm -rf build vcpkg_installed
+	rm -rf build vcpkg_installed kof-$(TAG_NAME)-$(OS)-$(ARCH).tar.gz
 
 tar/gz:	build
-	tar cvfz kof.tar.gz build/kof
+	tar cvfz kof-$(TAG_NAME)-$(OS)-$(ARCH).tar.gz build/kof
 
-ARCH  := $(shell uname -m)
 CMAKE_VERSION=3.31.7
 cmake/install:
 	curl -L -o cmake.sh https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-$(ARCH).sh
