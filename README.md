@@ -1,4 +1,6 @@
-# The King of Fighters (SDL-based)
+[![CI](https://github.com/humbertodias/kof/actions/workflows/ci.yml/badge.svg)](https://github.com/humbertodias/kof/actions/workflows/ci.yml)
+
+# The King of Fighters
 
 A cross-platform implementation of **The King of Fighters**, using **SDL2**.  
 Character configuration follows the **M.U.G.E.N** format.
