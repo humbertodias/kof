@@ -27,7 +27,7 @@ ci:
 	docker run --rm -v "$(PWD)":/app -w /app kof sh -c "make clean build"
 
 clean:
-	rm -rf build vcpkg_installed kof-$(TAG_NAME)-$(OS)-$(ARCH).tar.gz
+	rm -rf build kof-$(TAG_NAME)-$(OS)-$(ARCH).tar.gz
 
 tar/gz:	build
 	tar cvfz kof-$(TAG_NAME)-$(OS)-$(ARCH).tar.gz build/kof
