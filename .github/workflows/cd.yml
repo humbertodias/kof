@@ -1,0 +1,74 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+# required for upload
+permissions:
+  contents: write
+
+jobs:
+
+  Linux:
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        runner: [ ubuntu-24.04, ubuntu-24.04-arm ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+            submodules: true
+            
+      - name: Install dependencies
+        run: sudo apt update -y && sudo apt install -y cmake build-essential curl git pkg-config zip libxmu-dev libxi-dev libgl-dev autoconf automake autoconf-archive libltdl-dev python3 python3-jinja2 ninja-build
+
+      - name: Build tar.gz
+        run: |
+            make tar/gz
+
+            mv Resource data
+            zip -9 -r data.zip 
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            *.tar.gz
+            data.zip
+
+  MacOS:
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        runner: [ macos-latest, macos-13 ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+            submodules: true
+
+      - name: Install
+        # run: brew install sdl2 sdl2_image sdl2_gfx cmake make
+        run: |
+            brew install cmake curl git pkg-config zip libxmu libxi mesa autoconf automake autoconf-archive libtool python3 ninja
+            pip3 install Jinja2
+
+      - name: Build tar.gz
+        run: | 
+            make tar/gz
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            *.tar.gz            

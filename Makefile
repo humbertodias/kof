@@ -21,6 +21,9 @@ ci:
 clean:
 	rm -rf build vcpkg_installed
 
+tar/gz:	build
+	tar cvfz kof.tar.gz build/kof
+
 ARCH  := $(shell uname -m)
 CMAKE_VERSION=3.31.7
 cmake/install:

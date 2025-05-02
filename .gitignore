@@ -58,3 +58,5 @@ assets
 build
 cmake-build-*
 vcpkg_installed/
+kof.tar.gz
+data.zip
