@@ -27,7 +27,7 @@ jobs:
             submodules: true
             
       - name: Install dependencies
-        run: sudo apt update -y && sudo apt install -y cmake build-essential curl git pkg-config zip libxmu-dev libxi-dev libgl-dev autoconf automake autoconf-archive libltdl-dev python3 python3-jinja2 ninja-build libgles2-mesa-dev
+        run: sudo apt update -y && sudo apt install -y cmake build-essential curl git pkg-config zip libxmu-dev libxi-dev libgl-dev autoconf automake autoconf-archive libltdl-dev python3 python3-jinja2 ninja-build
 
       - name: Build tar.gz
         run: |
@@ -57,7 +57,7 @@ jobs:
 
       - name: Install
         run: |
-            brew install cmake curl git pkg-config zip libxmu libxi mesa autoconf automake autoconf-archive libtool python3 ninja mesa
+            brew install cmake curl git pkg-config zip libxmu libxi mesa autoconf automake autoconf-archive libtool python3 ninja
       - name: Build tar.gz
         run: | 
             make tar/gz
