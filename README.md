@@ -1,4 +1,5 @@
 [![CI](https://github.com/humbertodias/kof/actions/workflows/ci.yml/badge.svg)](https://github.com/humbertodias/kof/actions/workflows/ci.yml)
+[![CD](https://github.com/humbertodias/kof/actions/workflows/cd.yml/badge.svg)](https://github.com/humbertodias/kof/actions/workflows/cd.yml)
 
 # The King of Fighters
 
