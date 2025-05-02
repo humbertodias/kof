@@ -34,7 +34,7 @@ jobs:
             make tar/gz
 
             mv Resource data
-            zip -9 -r data.zip 
+            zip -9 -r data.zip data
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
