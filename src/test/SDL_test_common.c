@@ -699,6 +699,12 @@ SDLTest_CommonInit(SDLTest_CommonState * state)
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, state->gl_profile_mask);
         }
 
+#ifdef __APPLE__
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+#endif
+
         if (state->verbose & VERBOSE_MODES) {
             SDL_Rect bounds;
             SDL_DisplayMode mode;
