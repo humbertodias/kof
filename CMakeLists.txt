@@ -51,7 +51,6 @@ include_directories(
     ${VORBIS_INCLUDE_DIRS}
     ${FREETYPE_INCLUDE_DIRS}
     ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include
-    
 )
 
 link_directories(
@@ -74,8 +73,8 @@ target_link_libraries(${PROJECT_NAME}
     SDL2_ttf::SDL2_ttf-static
     SDL2_image::SDL2_image-static
     SDL2_mixer::SDL2_mixer-static
+    SDL2::SDL2_gfx
     GLEW::glew_s
-    GLU
 )
 
 if(APPLE)
