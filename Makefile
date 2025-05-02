@@ -14,6 +14,10 @@ docker/build:
 docker/run:
 	docker run -it -v `pwd`:/wd -w /wd kof
 
+ci:
+	docker build -t kof .
+	docker run --rm -v "$(PWD)":/app -w /app kof sh -c "make clean build"
+
 clean:
 	rm -rf build vcpkg_installed
 
