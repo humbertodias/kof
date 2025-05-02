@@ -12,6 +12,9 @@ build:
 	$(CMAKE) -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja
 	$(CMAKE) --build build
 
+run:
+	(cd Resource && ../build/kof)
+
 vcpkg/install:
 	./vcpkg/bootstrap-vcpkg.sh
 	./vcpkg/vcpkg install
