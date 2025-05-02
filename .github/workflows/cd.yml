@@ -56,11 +56,8 @@ jobs:
             submodules: true
 
       - name: Install
-        # run: brew install sdl2 sdl2_image sdl2_gfx cmake make
         run: |
             brew install cmake curl git pkg-config zip libxmu libxi mesa autoconf automake autoconf-archive libtool python3 ninja
-            pip3 install Jinja2
-
       - name: Build tar.gz
         run: | 
             make tar/gz
@@ -71,4 +68,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            *.tar.gz            
+            *.tar.gz
