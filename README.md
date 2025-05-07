@@ -1,6 +1,6 @@
 [![CI](https://github.com/humbertodias/kof/actions/workflows/ci.yml/badge.svg)](https://github.com/humbertodias/kof/actions/workflows/ci.yml)
 [![CD](https://github.com/humbertodias/kof/actions/workflows/cd.yml/badge.svg)](https://github.com/humbertodias/kof/actions/workflows/cd.yml)
-
+![GitHub all downloads](https://img.shields.io/github/downloads/humbertodias/kof/total)
 # The King of Fighters
 
 A cross-platform implementation of **The King of Fighters**, using **SDL2**.  
